@@ -141,17 +141,17 @@ CREATE TABLE IF NOT EXISTS `sifDB`.`venda` (
   CONSTRAINT `fk_venda_funcionario1`
     FOREIGN KEY (`funcionario_funcionario_id`)
     REFERENCES `sifDB`.`funcionario` (`funcionario_id`)
-    ON DELETE CASCADE
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_venda_veiculo1`
     FOREIGN KEY (`veiculo_veiculo_id`)
     REFERENCES `sifDB`.`veiculo` (`veiculo_id`)
-    ON DELETE CASCADE
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_venda_cliente1`
     FOREIGN KEY (`cliente_cliente_id`)
     REFERENCES `sifDB`.`cliente` (`cliente_id`)
-    ON DELETE CASCADE
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -204,11 +204,20 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 delimiter |
 
-create trigger trg_gerente after insert on gerente
+create trigger trg_gerente after insert 
+on gerente
 for each row
 begin
     insert into funcionario (gerente_gerente_id)
     value (new.gerente_id);
+end;
+|
+
+create trigger trg_vendedor after insert on vendedor
+for each row
+begin
+    insert into funcionario (vendedor_vendedor_id)
+    value (new.vendedor_id);
 end;
 |
 delimiter ;
