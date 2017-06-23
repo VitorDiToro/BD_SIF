@@ -188,12 +188,12 @@ CREATE TABLE IF NOT EXISTS `sifDB`.`venda_has_acessorio` (
   CONSTRAINT `fk_venda_has_acessorio_venda1`
     FOREIGN KEY (`venda_venda_id`)
     REFERENCES `sifDB`.`venda` (`venda_id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_venda_has_acessorio_acessorio1`
     FOREIGN KEY (`acessorio_acessorio_id`)
     REFERENCES `sifDB`.`acessorio` (`acessorio_id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
